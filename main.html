@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Today's News</title>
+        <style>
+                #top{
+                    background-color: rgb(3, 3, 3);
+                    align-content: center;
+                    color: white;
+                    height: 55px;
+                  
+                   
+                }
+                #title{
+                    font: 29px/1.4em georgia,palatino,'book antiqua','palatino linotype',serif;
+                    padding-left: 10%;
+                    padding-top: 0.3%;
+                }
+                #all{
+                    width: 60%;
+                    padding-left: 25%;
+                    background-color: rgb(221, 212, 212);
+                    
+                }
+        </style>
+        <script type="text/javascript">
+
+            function fetch(){
+                var leadTitle = document.getElementById('leadTitle').value;
+                var otherTitles = document.getElementById('otherTitles').value;
+                
+                var div = document.createElement('DIV');
+                div.id = "allNews";
+                var div2 = document.createElement('DIV');
+                div2.id = "lead";   
+                var div3 = document.createElement('DIV'); 
+                div3.id = "others";
+
+                var lead = document.createTextNode(leadTitle);
+                div2.appendChild(lead);
+                div.appendChild(div2);
+                var others = document.createTextNode(otherTitles);
+                div3.appendChild(others); 
+                div.appendChild(div3);              
+                var allNews = document.getElementById('all');             
+
+                allNews.appendChild(div);
+
+
+            }
+
+        </script>
+    </head>
+    <body onload="fetch()">
+        <div id="top">
+            <h2 id="title">Today's News: </h3>
+        </div>
+        <input type="text" id="leadTitle">
+        <input type="text" id="otherTitles">
+        
+        <div id= "all">
+
+        </div>
+    </body>
+</html>
