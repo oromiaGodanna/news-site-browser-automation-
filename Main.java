@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -23,12 +24,12 @@ public class Main {
         List <WebElement> otherTitles= driver.findElements(By.className("article-row"));
         otherTitles.add(0, leadTitle);
 
-           /*System.out.println(leadTitle.getText());
+        System.out.println(leadTitle.getText());
 
         for(WebElement eachElement:otherTitles){
             System.out.println(eachElement.getText());
-        }*/
-        forward(otherTitles);
+        }
+        forward(leadTitle, otherTitles);
 
         System.out.println("page Title: " + driver.getTitle());
         System.out.println("Current URl: " + driver.getCurrentUrl());
@@ -42,22 +43,34 @@ public class Main {
 
         driver.close();
     }
-    public static void forward(List<WebElement> otherTitles){
+    public static void forward(WebElement leadTitle, List<WebElement> otherTitles){
+        ArrayList<String> allInOne = new ArrayList<String>();
+
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\ori\\IdeaProjects\\autotest\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver1 = new ChromeDriver();
 
-        driver.get("localhost:8000");
+        driver1.get("localhost:8000");
+        WebElement divLead = driver1.findElement(By.id("leadTitle"));
+        divLead.sendKeys(leadTitle.getText());
 
-       // WebElement allDiv = driver.findElement(By.id("all"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        for(WebElement eachElement:otherTitles){
+        for(WebElement eachElement:otherTitles) {
             String eachDiv = eachElement.getText();
-            //js.executeScript("var node = document.createElement('DIV');");
+            allInOne.add(eachDiv);
+        }
+        WebElement otherDivs = driver1.findElement(By.id("otherTitles"));
+        otherDivs.sendKeys(allInOne.toString());
+
+
+//        WebElement allDiv = driver.findElement(By.id("all"));
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        for(WebElement eachElement:otherTitles){
+//            String eachDiv = eachElement.getText();
+//            js.executeScript("var node = document.createElement('DIV');");
 //            js.executeScript("var textNode = document.createTextNode('this is the frist div that i am gonna create');");
 //            js.executeScript("node.appendChild(textNode);");
 //            js.executeScript("document.getElementById('all').appendChild(node);");
-
-        }
+//
+//        }
 
 
     }
